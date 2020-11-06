@@ -23,7 +23,7 @@ public interface CheckGroupService {
     //查询全部id
     List<Integer> findCheckItemIdsByCheckGroupId(Integer id);
 
-     void edit(CheckGroup checkGroup, Integer[] checkitemIds);
+    void edit(CheckGroup checkGroup, Integer[] checkitemIds);
 
-
+    List<CheckGroup> findAll();
 }

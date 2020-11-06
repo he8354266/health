@@ -11,7 +11,8 @@
     </insert>
 
     <insert id="setCheckGroupAndCheckItem" parameterType="map">
-        insert into t_checkgroup_checkitem(checkgroup_id,checkitem_id) values
+        insert into t_checkgroup_checkitem(checkgroup_id,checkitem_id)
+        values
         (#{checkgroupId},#{checkitemId})
     </insert>
 
@@ -38,7 +39,7 @@
         update t_checkgroup
         <set>
             <if test="name != null">
-                name =#{name}
+                name = #{name},
             </if>
             <if test="sex != null">
                 sex = #{sex},
@@ -56,8 +57,12 @@
                 remark = #{remark},
             </if>
         </set>
-        where id=#{id}
+        where id = #{id}
     </update>
+
+    <select id="findAll" resultType="com.itheima.pojo.CheckGroup">
+        select * from t_checkgroup
+    </select>
 
 
 </mapper>

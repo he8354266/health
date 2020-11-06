@@ -60,5 +60,9 @@
         where id = #{id}
     </update>
 
+    <select id="findAll" resultType="com.itheima.pojo.CheckGroup">
+        select * from t_checkgroup
+    </select>
+
 
 </mapper>
