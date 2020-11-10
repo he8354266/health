@@ -79,6 +79,12 @@ public class CheckGroupServiceImpl implements CheckGroupService {
         return checkGroupList;
     }
 
+    @Override
+    public List<CheckGroup> findCheckGroupByIds(Integer id) {
+        List<CheckGroup> checkGroupList =  checkGroupDao.findCheckGroupByIds(id);
+        return checkGroupList;
+    }
+
     //建立检查组和检查项多对多关系
     public void setCheckGroupAndCheckItem(Integer checkGroupId,Integer[] checkitemIds){
         if(checkitemIds != null && checkitemIds.length > 0){

@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import redis.clients.jedis.JedisPool;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,10 +34,10 @@ public class SetmealServiceImpl implements SetmealService {
     public void add(Setmeal setmeal, Integer[] checkgroupIds) {
         setmealDao.add(setmeal);
         Integer setmealId = setmeal.getId();
-        this.setSetmealAndCheckgroup(setmealId,checkgroupIds);
+        this.setSetmealAndCheckgroup(setmealId, checkgroupIds);
         //将图片名称保存到Redis集合中
         String fileName = setmeal.getImg();
-        jedisPool.getResource().sadd(RedisConstant.SETMEAL_PIC_DB_RESOURCES,fileName);
+        jedisPool.getResource().sadd(RedisConstant.SETMEAL_PIC_DB_RESOURCES, fileName);
     }
 
     private void setSetmealAndCheckgroup(Integer setmealId, Integer[] checkgroupIds) {
@@ -58,5 +59,20 @@ public class SetmealServiceImpl implements SetmealService {
         PageHelper.startPage(currentPage, pageSize);
         Page<Setmeal> page = setmealDao.findByCondition(queryString);
         return new PageResult(page.getTotal(), page.getResult());
+    }
+
+    @Override
+    public List<Setmeal> findAll() {
+        return setmealDao.findAll();
+    }
+
+    @Override
+    public Setmeal findById(Integer id) {
+        return setmealDao.findById(id);
+    }
+
+    @Override
+    public Setmeal findByIds(Integer id) {
+        return setmealDao.findByIds(id);
     }
 }

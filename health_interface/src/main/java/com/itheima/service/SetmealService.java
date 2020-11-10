@@ -4,6 +4,8 @@ import com.itheima.entity.PageResult;
 import com.itheima.entity.QueryPageBean;
 import com.itheima.pojo.Setmeal;
 
+import java.util.List;
+
 /**
  * @Title: project
  * @Package * @Description:     * @author CodingSir
@@ -13,4 +15,10 @@ public interface SetmealService {
     void add(Setmeal setmeal, Integer[] checkgroupIds);
 
     PageResult pageQuery(QueryPageBean queryPageBean);
+
+    List<Setmeal> findAll();
+
+    Setmeal findById(Integer id);
+
+    Setmeal findByIds(Integer id);
 }
