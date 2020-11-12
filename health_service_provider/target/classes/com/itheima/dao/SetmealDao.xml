@@ -53,4 +53,6 @@
     <select id="findByIds" parameterType="int" resultType="com.itheima.pojo.Setmeal">
         select * from t_setmeal where id=#{id}
     </select>
+
+
 </mapper>

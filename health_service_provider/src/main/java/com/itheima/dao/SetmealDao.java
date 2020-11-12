@@ -24,4 +24,6 @@ public interface SetmealDao {
     Setmeal findById(int id);
 
     Setmeal findByIds(int id);
+
+
 }
