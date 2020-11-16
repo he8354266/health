@@ -80,7 +80,7 @@ public class SetmealServiceImpl implements SetmealService {
             Map map = new HashMap();
             map.put("setmeal", setmealDao.findById(setmeal.getId()));
             try {
-                this.generteHtml("mobile_setmeal_detail.ftl", "setmeal_deatil_" + setmeal.getId() + ".html", map);
+                this.generteHtml("mobile_setmeal_detail.ftl", "setmeal_detail_" + setmeal.getId() + ".html", map);
             } catch (TemplateException e) {
                 e.printStackTrace();
             }
