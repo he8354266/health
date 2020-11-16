@@ -5,6 +5,7 @@ import com.itheima.entity.QueryPageBean;
 import com.itheima.pojo.Setmeal;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Title: project
@@ -21,4 +22,10 @@ public interface SetmealService {
     Setmeal findById(Integer id);
 
     Setmeal findByIds(Integer id);
+
+    void delete(Integer id);
+
+    List<Map> findCheckgroup(int id);
+
+    void deleteCheckgroup(int id);
 }

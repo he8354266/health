@@ -14,6 +14,7 @@ public class MessageConstant {
     public static final String UPLOAD_SUCCESS = "上传成功";
     public static final String ADD_CHECKGROUP_FAIL = "新增检查组失败";
     public static final String ADD_CHECKGROUP_SUCCESS = "新增检查组成功";
+    public static final String DELETE_SETMEAL_SUCCESS = "删除检查套餐成功";
     public static final String DELETE_CHECKGROUP_FAIL = "删除检查组失败";
     public static final String DELETE_CHECKGROUP_SUCCESS = "删除检查组成功";
     public static final String QUERY_CHECKGROUP_SUCCESS = "查询检查组成功";

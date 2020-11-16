@@ -25,5 +25,9 @@ public interface SetmealDao {
 
     Setmeal findByIds(int id);
 
+    void delete(int id);
 
+    List<Map> findCheckgroup(int id);
+
+    void deleteCheckgroup(int id);
 }

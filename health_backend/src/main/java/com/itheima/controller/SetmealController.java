@@ -9,6 +9,7 @@ import com.itheima.pojo.Setmeal;
 import com.itheima.service.SetmealService;
 import com.itheima.utils.QiniuUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,8 @@ import redis.clients.jedis.JedisPool;
 import com.itheima.constant.RedisConstant;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -35,7 +38,7 @@ public class SetmealController {
 
     //文件上传
     @RequestMapping("/upload")
-    public Result upload(@RequestParam("imgFile") MultipartFile imgFile){
+    public Result upload(@RequestParam("imgFile") MultipartFile imgFile) {
         System.out.println(imgFile);
         String originalFilename = imgFile.getOriginalFilename();//原始文件名 3bd90d2c-4e82-42a1-a401-882c88b06a1a2.jpg
         int index = originalFilename.lastIndexOf(".");
@@ -43,13 +46,13 @@ public class SetmealController {
         String fileName = UUID.randomUUID().toString() + extention;//	FuM1Sa5TtL_ekLsdkYWcf5pyjKGu.jpg
         try {
             //将文件上传到七牛云服务器
-            QiniuUtils.upload2Qiniu(imgFile.getBytes(),fileName);
-            jedisPool.getResource().sadd(RedisConstant.SETMEAL_PIC_RESOURCES,fileName);
+            QiniuUtils.upload2Qiniu(imgFile.getBytes(), fileName);
+            jedisPool.getResource().sadd(RedisConstant.SETMEAL_PIC_RESOURCES, fileName);
         } catch (IOException e) {
             e.printStackTrace();
             return new Result(false, MessageConstant.PIC_UPLOAD_FAIL);
         }
-        return new Result(true, MessageConstant.PIC_UPLOAD_SUCCESS,fileName);
+        return new Result(true, MessageConstant.PIC_UPLOAD_SUCCESS, fileName);
     }
 
     @RequestMapping("/findPage")
@@ -58,13 +61,29 @@ public class SetmealController {
     }
 
     @RequestMapping("/add")
-    public Result add(@RequestBody Setmeal setmeal,@RequestParam  Integer[] checkgroupIds){
-        try{
-            setmealService.add(setmeal,checkgroupIds);
-        }catch (Exception e){
+    public Result add(@RequestBody Setmeal setmeal, @RequestParam Integer[] checkgroupIds) {
+        try {
+            setmealService.add(setmeal, checkgroupIds);
+        } catch (Exception e) {
             e.printStackTrace();
-            return new Result(false,MessageConstant.ADD_SETMEAL_FAIL);
+            return new Result(false, MessageConstant.ADD_SETMEAL_FAIL);
         }
-        return new Result(true,MessageConstant.ADD_SETMEAL_SUCCESS);
+        return new Result(true, MessageConstant.ADD_SETMEAL_SUCCESS);
+    }
+
+    @RequestMapping("/delete")
+    @Transactional
+    public Result delete(@RequestParam int id) {
+
+        List<Map> mapList = setmealService.findCheckgroup(id);
+        if (mapList != null) {
+            for (Map map : mapList) {
+                int setmealId = (int) map.get("setmeal_id");
+                //删除对应id
+                setmealService.deleteCheckgroup(setmealId);
+            }
+        }
+        setmealService.delete(id);
+        return new Result(true,MessageConstant.DELETE_SETMEAL_SUCCESS);
     }
 }

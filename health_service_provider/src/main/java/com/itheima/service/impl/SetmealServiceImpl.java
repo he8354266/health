@@ -138,4 +138,20 @@ public class SetmealServiceImpl implements SetmealService {
     public Setmeal findByIds(Integer id) {
         return setmealDao.findByIds(id);
     }
+
+    @Override
+    public void delete(Integer id) {
+    setmealDao.delete(id);
+    }
+
+    @Override
+    public List<Map> findCheckgroup(int id) {
+        List<Map> mapList =   setmealDao.findCheckgroup(id);
+        return mapList;
+    }
+
+    @Override
+    public void deleteCheckgroup(int id) {
+        setmealDao.deleteCheckgroup(id);
+    }
 }
