@@ -154,4 +154,9 @@ public class SetmealServiceImpl implements SetmealService {
     public void deleteCheckgroup(int id) {
         setmealDao.deleteCheckgroup(id);
     }
+
+    @Override
+    public List<Map<String, Object>> findSetmealCount() {
+        return setmealDao.findSetmealCount();
+    }
 }

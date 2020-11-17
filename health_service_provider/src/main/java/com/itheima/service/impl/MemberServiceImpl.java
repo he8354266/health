@@ -8,6 +8,9 @@ import com.itheima.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Title: project
  * @Package * @Description:     * @author CodingSir
@@ -33,6 +36,17 @@ public class MemberServiceImpl implements MemberService {
             member.setPassword(password);
         }
         memberDao.add(member);
+    }
+
+    @Override
+    public List<Integer> findMemberCountByMonths(List<String> months) {
+        List<Integer> list = new ArrayList<>();
+        for (String months1 : months) {
+            months1 = months1 + ".31";
+            Integer count = memberDao.findMemberCountBeforeDate(months1);
+            list.add(count);
+        }
+        return list;
     }
 
 }

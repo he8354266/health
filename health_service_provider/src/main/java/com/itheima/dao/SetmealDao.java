@@ -30,4 +30,6 @@ public interface SetmealDao {
     List<Map> findCheckgroup(int id);
 
     void deleteCheckgroup(int id);
+
+    List<Map<String, Object>> findSetmealCount();
 }

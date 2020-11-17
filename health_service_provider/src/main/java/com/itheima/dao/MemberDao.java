@@ -2,6 +2,8 @@ package com.itheima.dao;
 
 import com.itheima.pojo.Member;
 
+import java.util.List;
+
 /**
  * @Title: project
  * @Package * @Description:     * @author CodingSir
@@ -9,5 +11,8 @@ import com.itheima.pojo.Member;
  */
 public interface MemberDao {
     Member findByTelephone(String telephone);
+
     void add(Member member);
+
+    Integer findMemberCountBeforeDate(String months);
 }
