@@ -15,4 +15,11 @@ public interface MemberDao {
     void add(Member member);
 
     Integer findMemberCountBeforeDate(String months);
+
+    Integer findMemberCountByDate(String today);
+
+    Integer findMemberCountAfterDate(String date);
+
+    Integer findMemberTotalCount();
+
 }

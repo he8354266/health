@@ -16,4 +16,14 @@ public interface OrderDao {
     void add(Order order);
 
     Map findById(int id);
+
+    Integer findOrderCountByDate(String date);
+
+    Integer findOrderCountAfterDate(String date);
+
+    Integer findVisitsCountByDate(String date);
+
+    Integer findVisitsCountAfterDate(String date);
+
+    List<Map> findHotSetmeal();
 }
